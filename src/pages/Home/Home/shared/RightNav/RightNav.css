@@ -1,0 +1,19 @@
+.btn-position{
+    position: absolute;
+    right: 235px;
+    top: 1865px;
+}
+.text-position{
+    position: absolute;
+    width: 199px;
+    height: 130px;
+    left: 1150px;
+    top: 1454px;
+    color: white;
+    
+}
+.circle{
+    clip-path: circle();
+    width: 150px;
+    align-items: center;
+}

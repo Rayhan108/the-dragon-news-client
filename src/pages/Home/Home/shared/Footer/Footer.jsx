@@ -1,9 +1,9 @@
 import React from 'react';
-
+import {FaCopyright} from 'react-icons/fa';
 const Footer = () => {
     return (
         <div>
-            <h1 className='text-center'>copyright news</h1>
+            <p className='text-center'>  <FaCopyright /> copyright news by Rayhan</p>
         </div>
     );
 };
