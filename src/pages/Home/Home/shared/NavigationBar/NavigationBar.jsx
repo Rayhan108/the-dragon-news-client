@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Image, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../../../Provider/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
@@ -29,11 +29,14 @@ const NavigationBar = () => {
            <Link className='text-decoration-none ms-3 text-black'>Career</Link>
           </Nav>
           <Nav>
-        { user &&   <Nav.Link href="#deets">
+            <div className='me-3'>
+            { user ?    <Image  style={{height:'40px'}} src={user.photoURL} roundedCircle />   :<Nav.Link href="#deets">
           <FaUserCircle style={{fontSize:'2rem'}}></FaUserCircle>
           </Nav.Link>
           }
 
+            </div>
+        
             
          { user ?  <Button onClick={handleLogOut} variant="secondary">Logout</Button> :
         <Link to="/login"><Button variant="secondary">Login</Button></Link> 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import "./RightNav.css";
 import {
@@ -11,16 +11,42 @@ import {
 import Qzone from "../Qzone/Qzone";
 import bg from "../../../../../assets/bg.png";
 import dev from "../../../../../assets/WhatsApp Image 2023-02-12 at 8.29.49 PM.jpeg";
+import { GoogleAuthProvider } from "firebase/auth";
+import { AuthContext } from "../../../../../Provider/AuthProvider";
 
 const RightNav = () => {
+  const { googleLogin, setUser } = useContext(AuthContext);
+  const provider = new GoogleAuthProvider();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const handleGoogleLogin = () => {
+    setError("");
+    setSuccess("");
+    googleLogin(provider)
+      .then((result) => {
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+        setSuccess("Login Succesfull");
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
   return (
     <div>
       <div className="">
         <h3>Login with</h3>
-        <Button className="mt-2 mb-2" variant="outline-primary">
+        <Button
+          onClick={handleGoogleLogin}
+          className="mt-2 mb-2"
+          variant="outline-primary"
+        >
           {" "}
           <FaGoogle /> Login with Google
         </Button>
+        <p>{success}</p>
+        <p>{error}</p>
         <Button variant="outline-secondary">
           {" "}
           <FaGithub /> Login with github
