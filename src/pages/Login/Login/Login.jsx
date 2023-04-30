@@ -1,9 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Login = () => {
+  const location = useLocation();
+  // console.log(location);
+  const navigate = useNavigate()
+  let from = location.state?.from?.pathname || "/catagory/0";
     const [show, setShow] = useState(false);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -20,6 +24,7 @@ const Login = () => {
           .then((result) => {
             const loggedUser = result.user;
             // console.log(loggedUser);
+            navigate(from)
             form.reset();
          
             setSuccess(" Login successfull");

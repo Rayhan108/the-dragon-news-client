@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 
 const Register = () => {
-    const {createUser} =useContext(AuthContext)
+    const {createUser,updateUserData} =useContext(AuthContext)
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+const [accept,setAccept] = useState(false)
+
 
     const handleSubmit = event=>{
         event.preventDefault()
@@ -21,12 +23,17 @@ const Register = () => {
         .then(result=>{
             const loggedUser = result.user;
             console.log(loggedUser);
+            updateUserData(result.user,name,photo)
             form.reset()
             setSuccess('Account has been created successfully')
         })
         .catch(error=>{
             setError(error.message)
         })
+      
+    }
+    const handleAccept =(event)=>{
+      setAccept(event.target.checked)
     }
     return (
         <Container className='mt-5'>
@@ -54,10 +61,10 @@ const Register = () => {
     <Form.Control type="password" name="password" placeholder="Password" required />
   
   </Form.Group>
-  <Form.Group className="mb-3" controlId="formBasicCheckbox">
-    <Form.Check type="checkbox" label="Accept all terms & condition" />
+  <Form.Group onClick={handleAccept} className="mb-3" controlId="formBasicCheckbox">
+    <Form.Check type="checkbox" label={<>Accept all <Link to="/terms">terms & condition</Link></>} />
   </Form.Group>
-  <Button  className='mb-2' variant="primary" type="submit">
+  <Button  className='mb-2' variant="primary" type="submit" disabled={!accept}>
    Register
   </Button>
   <br />
