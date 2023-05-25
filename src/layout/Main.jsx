@@ -5,8 +5,8 @@ import Footer from '../pages/Home/Home/shared/Footer/Footer';
 import { Col, Container, Row } from 'react-bootstrap';
 import LeftNav from '../pages/Home/Home/shared/LeftNav/LeftNav';
 
-import RightNav from '../pages/Home/Home/shared/RightNav/RightNAv';
 import NavigationBar from '../pages/Home/Home/shared/NavigationBar/NavigationBar';
+import RightNav from '../pages/Home/Home/shared/RightNav/RightNav';
 
 const Main = () => {
     return (
